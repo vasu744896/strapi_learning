@@ -42,28 +42,23 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: IconDashboard,
     },
     {
-      title: "Lifecycle",
-      url: "#",
+      title: "Categories",
+      url: "/dashboard/categories",
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Products",
+      url: "/dashboard/products",
       icon: IconChartBar,
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Sales",
+      url: "/dashboard/sales",
       icon: IconFolder,
-    },
-    {
-      title: "Team",
-      url: "#",
-      icon: IconUsers,
     },
   ],
   navClouds: [
@@ -117,34 +112,24 @@ const data = {
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/settings",
       icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
     },
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
+      name: "Today sales",
+      url: "/dashboard/reports/today",
       icon: IconDatabase,
     },
     {
-      name: "Reports",
-      url: "#",
+      name: "Weekly Sales",
+      url: "/dashboard/reports/weekly",
       icon: IconReport,
     },
     {
-      name: "Word Assistant",
-      url: "#",
+      name: "Monthly Sales",
+      url: "/dashboard/reports/monthly",
       icon: IconFileWord,
     },
   ],
