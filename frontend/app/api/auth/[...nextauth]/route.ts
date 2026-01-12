@@ -36,6 +36,8 @@ const handler = NextAuth({
           id: String(data.user.id),
           name: data.user.username,
           email: data.user.email,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
           jwt: data.jwt,
         };
       },
@@ -47,6 +49,8 @@ const handler = NextAuth({
       if (user) {
         token.id = user.id;
         token.jwt = user.jwt;
+        token.firstName = user.firstName;
+        token.lastName = user.lastName;
       }
       return token;
     },
@@ -54,6 +58,8 @@ const handler = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.firstName = token.firstName as string;
+        session.user.lastName = token.lastName as string;
         session.user.jwt = token.jwt as string;
       }
       return session;

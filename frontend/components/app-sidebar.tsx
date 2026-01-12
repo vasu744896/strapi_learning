@@ -2,24 +2,22 @@
 
 import * as React from "react";
 import {
-  IconCamera,
-  IconChartBar,
   IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconInnerShadowTop,
   IconListDetails,
+  IconChartBar,
+  IconFolder,
+  IconDatabase,
   IconReport,
+  IconFileWord,
   IconSettings,
+  IconInnerShadowTop,
 } from "@tabler/icons-react";
 
 import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+
 import {
   Sidebar,
   SidebarContent,
@@ -29,6 +27,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+
 import { useSession } from "next-auth/react";
 
 const data = {
@@ -75,15 +74,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        {session?.user && (
-          <NavUser
-            user={{
-              name: session.user.name ?? "User",
-              email: session.user.email ?? "",
-              avatar: "/avatars/shadcn.jpg", // ✅ fallback avatar
-            }}
-          />
-        )}
+        {session?.user && <NavUser user={session.user} />}
       </SidebarFooter>
     </Sidebar>
   );

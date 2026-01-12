@@ -32,24 +32,26 @@ import {
 } from "@/components/ui/sidebar";
 
 import { signOut } from "next-auth/react";
+import type { Session } from "next-auth";
 
 export function NavUser({
   user,
 }: {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  user: Session["user"];
 }) {
   const { isMobile } = useSidebar();
 
+  const displayName =
+    user.firstName || user.lastName
+      ? `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim()
+      : user.name ?? "User";
+
   const initials =
-    user.name
-      ?.split(" ")
+    displayName
+      .split(" ")
       .map((n) => n[0])
       .join("")
-      .toUpperCase() ?? "U";
+      .toUpperCase() || "U";
 
   return (
     <SidebarMenu>
@@ -61,14 +63,17 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage
+                  src="/avatars/shadcn.jpg"
+                  alt={displayName}
+                />
                 <AvatarFallback className="rounded-lg">
                   {initials}
                 </AvatarFallback>
               </Avatar>
 
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
+                <span className="truncate font-medium">{displayName}</span>
                 <span className="text-muted-foreground truncate text-xs">
                   {user.email}
                 </span>
@@ -87,14 +92,17 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage
+                    src="/avatars/shadcn.jpg"
+                    alt={displayName}
+                  />
                   <AvatarFallback className="rounded-lg">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
 
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate font-medium">{displayName}</span>
                   <span className="text-muted-foreground truncate text-xs">
                     {user.email}
                   </span>

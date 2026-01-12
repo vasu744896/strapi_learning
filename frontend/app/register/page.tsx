@@ -7,9 +7,9 @@ import { useRouter } from "next/navigation";
 import { GalleryVerticalEnd } from "lucide-react";
 import { IconLoader } from "@tabler/icons-react";
 
-import { LoginForm } from "@/components/login-form";
+import { RegisterForm } from "@/components/register-form";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -37,7 +37,7 @@ export default function LoginPage() {
           Baiondata Solution
         </a>
 
-        <LoginForm />
+        <RegisterForm />
       </div>
     </div>
   );
