@@ -20,7 +20,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { signIn } from "next-auth/react";
 
 export function RegisterForm({
   className,
@@ -59,7 +58,7 @@ export function RegisterForm({
       const token = registerRes.data.jwt;
       const userId = registerRes.data.user.id;
 
-      // STEP 2: Update firstName & lastName
+      // STEP 2: Update first & last name
       await axios.put(
         `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/users/${userId}`,
         {
@@ -73,25 +72,14 @@ export function RegisterForm({
         }
       );
 
-      //step 3: sign in the user with next auth 
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: formData.email,
-        password: formData.password,
-      });
-      
-      if (res?.error) {
-        router.replace("/dashboard");
-      }else {
-        toast.error("Login failed after registration. Please try again.");
-      }
-
-
       toast.success("Registration successful! Please login.");
       router.push("/login");
-    } catch (error) {
-        console.log(error);
-        toast.error("Registration failed. Please try again.");
+    } catch (error: any) {
+      const message =
+        error?.response?.data?.error?.message ||
+        "Email or username already exists";
+
+      toast.error(message);
     } finally {
       setLoading(false);
     }
